@@ -20,6 +20,7 @@ func _physics_process(delta):
 	player_movement(delta)
 	enemy_attack()
 	attack()
+	update_health()
 	
 	if health <= 0:
 		player_alive = false
@@ -102,7 +103,7 @@ func _on_player_hitbox_body_exited(body):
 		
 func enemy_attack():
 	if enemy_inattack_range and enemy_attack_cooldown == true:
-		health = health - 20
+		health = health - 10
 		enemy_attack_cooldown = false
 		$attack_cooldown.start()
 		print(health)
@@ -137,3 +138,22 @@ func _on_player_attack_cooldown_timeout():
 	$player_attack_cooldown.stop()
 	gmanager.player_current_attack = false
 	isattacking = false
+
+
+func update_health():
+	var healthbar = $healthbar
+	healthbar.value = health
+	
+	if health >= 100:
+		healthbar.visible = false
+	else:
+		healthbar.visible = true
+
+func _on_regen_cooldown_timeout():
+	#Need percentages
+	if health < 100:
+		health = health + 20
+		if health > 100:
+			health = 100
+	if health <= 0:
+		health = 0

@@ -1,15 +1,18 @@
 extends CharacterBody2D
 
 var speed = 40
-var health = 50
+var health = 100
+var attack_damage = 20 #player damage shouldnt be here
 
 var player_chase = false
 var player = null
 var player_inattack_range = false
 var can_take_damage = true
+ 
 
 func _physics_process(delta):
 	deal_with_damage()
+	update_health()
 	
 	if player_chase:
 		position += (player.position - position)/speed
@@ -49,7 +52,7 @@ func _on_enemy_hitbox_body_exited(body):
 func deal_with_damage():
 	if player_inattack_range and gmanager.player_current_attack == true:
 		if can_take_damage:
-			health = health - 20
+			health = health - attack_damage
 			$iframe_timer.start()
 			can_take_damage = false
 			if health <=0:
@@ -58,3 +61,13 @@ func deal_with_damage():
 
 func _on_iframe_timer_timeout():
 	can_take_damage = true
+
+
+func update_health():
+	var healthbar = $healthbar
+	healthbar.value = health
+	
+	if health >= 100:
+		healthbar.visible = false
+	else:
+		healthbar.visible = true

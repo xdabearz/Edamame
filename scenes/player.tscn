@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://bm040jw3r8n46" path="res://art/characters/player.png" id="2_c6frp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5hr52"]
-radius = 7.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mmb0f"]
 atlas = ExtResource("2_c6frp")
@@ -417,7 +416,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aoaae"]
-size = Vector2(30, 46)
+size = Vector2(28, 41)
 
 [node name="player" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -425,33 +424,53 @@ collision_layer = 3
 script = ExtResource("1_kg8f6")
 
 [node name="player_collision" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, -2)
+position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_5hr52")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_y16yb")
-animation = &"attack_side"
-frame = 1
-frame_progress = 0.75986
+animation = &"idle_side"
 offset = Vector2(0, -15)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 1)
+zoom = Vector2(3, 3)
+limit_left = 34
+limit_top = 0
+limit_right = 900
+limit_bottom = 850
+limit_smoothed = true
+rotation_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 
 [node name="player_hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_hitbox"]
-position = Vector2(1, -15)
+position = Vector2(1, -15.5)
 shape = SubResource("RectangleShape2D_aoaae")
 
 [node name="attack_cooldown" type="Timer" parent="."]
-wait_time = 0.5
 
 [node name="player_attack_cooldown" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="regen_cooldown" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="healthbar" type="ProgressBar" parent="."]
+modulate = Color(0.2038, 0.574818, 0.217114, 1)
+offset_left = -17.0
+offset_top = -43.0
+offset_right = 323.0
+offset_bottom = 14.0
+scale = Vector2(0.1, 0.1)
+show_percentage = false
 
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]
 [connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="timeout" from="player_attack_cooldown" to="." method="_on_player_attack_cooldown_timeout"]
+[connection signal="timeout" from="regen_cooldown" to="." method="_on_regen_cooldown_timeout"]

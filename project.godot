@@ -19,10 +19,6 @@ config/icon="res://art/icon.svg"
 
 gmanager="*res://script/global.gd"
 
-[display]
-
-window/stretch/scale=2.0
-
 [dotnet]
 
 project/assembly_name="PoppinEdamame"
