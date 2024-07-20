@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://ds3rde0cpcax0"]
+[gd_scene load_steps=58 format=3 uid="uid://ds3rde0cpcax0"]
 
 [ext_resource type="Script" path="res://script/player.gd" id="1_kg8f6"]
 [ext_resource type="Texture2D" uid="uid://bm040jw3r8n46" path="res://art/characters/player.png" id="2_c6frp"]
@@ -418,6 +418,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aoaae"]
 size = Vector2(28, 41)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vasps"]
+size = Vector2(33, 44)
+
 [node name="player" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 3
@@ -468,6 +471,14 @@ offset_right = 323.0
 offset_bottom = 14.0
 scale = Vector2(0.1, 0.1)
 show_percentage = false
+
+[node name="DialogueInteractionArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueInteractionArea"]
+position = Vector2(0.5, -12)
+shape = SubResource("RectangleShape2D_vasps")
 
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]

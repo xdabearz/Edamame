@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bx2fjenlj6fka"]
+[gd_scene load_steps=29 format=3 uid="uid://bx2fjenlj6fka"]
 
 [ext_resource type="Texture2D" uid="uid://bavde5e17mxgn" path="res://art/tilesets/Urban_Decay_Int_A1.png" id="1_idd7n"]
 [ext_resource type="Texture2D" uid="uid://bxh8f8xfpl8rk" path="res://art/tilesets/Urban_Decay_Int_A2.png" id="2_5lfs6"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://dvgccgakm5cko" path="res://art/tilesets/Urban_Decay_Int_E_clean.png" id="11_6yvnw"]
 [ext_resource type="PackedScene" uid="uid://ds3rde0cpcax0" path="res://scenes/player.tscn" id="12_qaxld"]
 [ext_resource type="PackedScene" uid="uid://bykixjnr34iu8" path="res://scenes/enemy.tscn" id="13_fsot0"]
+[ext_resource type="PackedScene" uid="uid://bowvgxeesh6mi" path="res://scenes/dialogue_area.tscn" id="14_k85w7"]
+[ext_resource type="PackedScene" uid="uid://bjoiqun1n3gih" path="res://scenes/dialogue_player.tscn" id="15_1m18h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1p22u"]
 texture = ExtResource("1_idd7n")
@@ -58936,6 +58938,9 @@ sources/8 = SubResource("TileSetAtlasSource_d07k3")
 sources/9 = SubResource("TileSetAtlasSource_shi4f")
 sources/10 = SubResource("TileSetAtlasSource_08h2k")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fkcu"]
+size = Vector2(49, 44)
+
 [node name="Devworld" type="Node2D"]
 y_sort_enabled = true
 
@@ -58957,6 +58962,20 @@ metadata/_edit_group_ = true
 
 [node name="player" parent="." instance=ExtResource("12_qaxld")]
 position = Vector2(145, 256)
+collision_layer = 7
 
 [node name="Enemy" parent="." instance=ExtResource("13_fsot0")]
 position = Vector2(216, 427)
+
+[node name="DialogueAreaBed" parent="." instance=ExtResource("14_k85w7")]
+position = Vector2(104, 189)
+text_key = "bed"
+
+[node name="CollisionShape2D" parent="DialogueAreaBed" index="0"]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_0fkcu")
+
+[node name="DialoguePlayer" parent="." instance=ExtResource("15_1m18h")]
+scene_text_file = "res://database/devroom_dialogue.json"
+
+[editable path="DialogueAreaBed"]
