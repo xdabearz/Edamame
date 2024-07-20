@@ -14,7 +14,7 @@ var current_dir = "none"
 var isattacking = false
 
 func _read():
-	$AnimatedSprite2D.play("idle_front")
+	$AnimatedSprite2D.play("idle_down")
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -31,22 +31,22 @@ func _physics_process(delta):
 func player_movement(delta):
 	#TODO - Smooth movement
 	#TODO - custom controls
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("right"):
 		current_dir = "right"
 		play_anim(1)
 		velocity.x = speed
 		velocity.y = 0
-	elif Input.is_action_pressed("ui_left"):
+	elif Input.is_action_pressed("left"):
 		current_dir = "left"
 		play_anim(1)
 		velocity.x = -speed
 		velocity.y = 0
-	elif Input.is_action_pressed("ui_down"):
+	elif Input.is_action_pressed("down"):
 		current_dir = "down"
 		play_anim(1)
 		velocity.x = 0
 		velocity.y = speed
-	elif Input.is_action_pressed("ui_up"):
+	elif Input.is_action_pressed("up"):
 		current_dir = "up"
 		play_anim(1)
 		velocity.x = 0

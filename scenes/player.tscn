@@ -434,6 +434,7 @@ shape = SubResource("CircleShape2D_5hr52")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_y16yb")
 animation = &"idle_side"
+frame_progress = 0.681608
 offset = Vector2(0, -15)
 
 [node name="Camera2D" type="Camera2D" parent="."]
