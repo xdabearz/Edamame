@@ -432,7 +432,9 @@ shape = SubResource("CircleShape2D_5hr52")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_y16yb")
-animation = &"walk_side"
+animation = &"attack_side"
+frame = 1
+frame_progress = 0.75986
 offset = Vector2(0, -15)
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -446,5 +448,10 @@ shape = SubResource("RectangleShape2D_aoaae")
 [node name="attack_cooldown" type="Timer" parent="."]
 wait_time = 0.5
 
+[node name="player_attack_cooldown" type="Timer" parent="."]
+wait_time = 0.5
+
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]
+[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="player_attack_cooldown" to="." method="_on_player_attack_cooldown_timeout"]

@@ -11,12 +11,21 @@ var player_alive = true
 const speed = 200
 var current_dir = "none"
 
+var isattacking = false
+
 func _read():
-	$AnimatedSprite2D.play("front_idle")
+	$AnimatedSprite2D.play("idle_front")
 
 func _physics_process(delta):
 	player_movement(delta)
 	enemy_attack()
+	attack()
+	
+	if health <= 0:
+		player_alive = false
+		health = 0
+		print("Player has been killed")
+		self.queue_free()
 
 func player_movement(delta):
 	#TODO - Smooth movement
@@ -57,25 +66,25 @@ func play_anim(movement):
 		anim.flip_h = false
 		if movement == 1:
 			anim.play("walk_side")
-		if movement == 0:
+		elif movement == 0 and isattacking == false:
 			anim.play("idle_side")
 	if dir == "left":
 		anim.flip_h = true
 		if movement == 1:
 			anim.play("walk_side")
-		if movement == 0:
-			anim.play("idle_side")
+		elif movement == 0 and isattacking == false:
+				anim.play("idle_side")
 	if dir == "up":
 		anim.flip_h = true
 		if movement == 1:
 			anim.play("walk_up")
-		if movement == 0:
+		elif movement == 0 and isattacking == false:
 			anim.play("idle_up")
 	if dir == "down":
 		anim.flip_h = true
 		if movement == 1:
 			anim.play("walk_down")
-		if movement == 0:
+		elif movement == 0 and isattacking == false:
 			anim.play("idle_down")
 
 func player():
@@ -101,3 +110,30 @@ func enemy_attack():
 
 func _on_attack_cooldown_timeout():
 	enemy_attack_cooldown = true
+	
+func attack():
+	var dir = current_dir
+	
+	if Input.is_action_just_pressed("attack"):
+		gmanager.player_current_attack = true
+		isattacking = true
+		if dir == "right":
+			$AnimatedSprite2D.flip_h = false
+			$AnimatedSprite2D.play("attack_side")
+			$player_attack_cooldown.start()
+		if dir == "left":
+			$AnimatedSprite2D.flip_h = true
+			$AnimatedSprite2D.play("attack_side")
+			$player_attack_cooldown.start()
+		if dir == "down":
+			$AnimatedSprite2D.play("attack_down")
+			$player_attack_cooldown.start()
+		if dir == "up":
+			$AnimatedSprite2D.play("attack_up")
+			$player_attack_cooldown.start()
+
+
+func _on_player_attack_cooldown_timeout():
+	$player_attack_cooldown.stop()
+	gmanager.player_current_attack = false
+	isattacking = false
