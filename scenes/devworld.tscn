@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bx2fjenlj6fka"]
+[gd_scene load_steps=30 format=3 uid="uid://bx2fjenlj6fka"]
 
 [ext_resource type="Texture2D" uid="uid://bavde5e17mxgn" path="res://art/tilesets/Urban_Decay_Int_A1.png" id="1_idd7n"]
 [ext_resource type="Texture2D" uid="uid://bxh8f8xfpl8rk" path="res://art/tilesets/Urban_Decay_Int_A2.png" id="2_5lfs6"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bykixjnr34iu8" path="res://scenes/enemy.tscn" id="13_fsot0"]
 [ext_resource type="PackedScene" uid="uid://bowvgxeesh6mi" path="res://scenes/dialogue_area.tscn" id="14_k85w7"]
 [ext_resource type="PackedScene" uid="uid://bjoiqun1n3gih" path="res://scenes/dialogue_player.tscn" id="15_1m18h"]
+[ext_resource type="PackedScene" uid="uid://b5c5g8odsoyh8" path="res://scenes/input_handler.tscn" id="16_ijn45"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1p22u"]
 texture = ExtResource("1_idd7n")
@@ -58977,5 +58978,7 @@ shape = SubResource("RectangleShape2D_0fkcu")
 
 [node name="DialoguePlayer" parent="." instance=ExtResource("15_1m18h")]
 scene_text_file = "res://database/devroom_dialogue.json"
+
+[node name="InputHandler" parent="." instance=ExtResource("16_ijn45")]
 
 [editable path="DialogueAreaBed"]

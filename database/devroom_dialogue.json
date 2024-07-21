@@ -1,13 +1,13 @@
 {
-    "bed": [
-        "It would be nice to sleep.",
-        "I spend too much time sleeping"
-    ],
-    "computer" : [
-        "I used to spend so much time on this",
-        "Hardly a reason to now without the internet..."
-    ],
-    "trash": [
-        "Empty"
-    ]
+	"bed": [
+		"It would be nice to sleep.",
+		"I spend too much time sleeping"
+	],
+	"computer" : [
+		"I used to spend so much time on this",
+		"Hardly a reason to now without the internet..."
+	],
+	"trash": [
+		"Empty"
+	]
 }
